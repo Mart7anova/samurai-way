@@ -1,0 +1,8 @@
+.header img{
+    width: 70px;
+}
+.content img{
+    width: 100px;
+    border: 1px solid darkgray;
+    border-radius: 50px;
+}
