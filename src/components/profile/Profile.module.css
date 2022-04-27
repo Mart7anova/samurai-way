@@ -1,0 +1,10 @@
+.content img{
+    width: 100px;
+    border: 1px solid darkgray;
+    border-radius: 50px;
+}
+.content {
+    grid-area: content;
+    background-color: ghostwhite;
+    padding: 10px;
+}

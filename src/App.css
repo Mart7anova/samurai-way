@@ -4,20 +4,9 @@
     display: grid;
     grid-template-areas:
         "header header"
-        "sidebar content";
+        "navbar content";
     grid-template-rows: 70px 1fr;
     grid-template-columns: 2fr 10fr;
 }
-.header {
-    grid-area: header;
-}
-.sidebar {
-    grid-area: sidebar;
-    background-color: lavender;
-    padding: 10px;
-}
-.content {
-    grid-area: content;
-    background-color: ghostwhite;
-    padding: 10px;
-}
+
+

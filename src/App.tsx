@@ -1,23 +1,17 @@
 import React from 'react';
 import './App.css';
-import {Header} from "./components/Header";
-import {Sidebar} from "./components/Sidebar";
-import {Content} from "./components/Content";
+import {Header} from "./components/header/Header";
+import {Profile} from "./components/profile/Profile";
+import {Navbar} from "./components/navbar/Navbar";
 
 
 function App() {
     return (
         <div className="App">
             <div className="grid">
-                <div className="header">
                     <Header/>
-                </div>
-                <div className="content">
-                    <Content/>
-                </div>
-                <div className="sidebar">
-                    <Sidebar/>
-                </div>
+                    <Profile/>
+                    <Navbar/>
             </div>
         </div>
     );

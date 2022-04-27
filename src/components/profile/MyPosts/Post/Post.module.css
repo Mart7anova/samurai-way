@@ -1,8 +1,6 @@
-.header img{
-    width: 70px;
-}
 .content img{
-    width: 100px;
+    width: 50px;
     border: 1px solid darkgray;
     border-radius: 50px;
+    margin: 10px;
 }

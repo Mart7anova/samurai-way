@@ -1,12 +1,12 @@
 import React from 'react';
-import './components.css'
+import c from './Post.module.css'
 
-export const Content=()=>{
+export const Post=()=>{
     return(
         <div>
-            <div className="content">
+            <div className={c.content}>
                 <img src="https://img.freepik.com/free-vector/cat-vector-head-kitten-cartoon_71328-174.jpg"/>
-                <p>Hello!</p>
+                Hello! I'm a Kitty Cat :)
             </div>
         </div>
     )
