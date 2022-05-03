@@ -1,4 +1,4 @@
-.grid {
+.App {
     margin: 0 auto; /*выравнивание по середине*/
     width: 1200px;
     display: grid;
@@ -7,6 +7,11 @@
         "navbar content";
     grid-template-rows: 70px 1fr;
     grid-template-columns: 2fr 10fr;
+}
+.App-content{
+    grid-area: content;
+    background-color: ghostwhite;
+    padding: 10px;
 }
 
 

@@ -1,0 +1,12 @@
+.navbar {
+    grid-area: navbar;
+    background-color: #CCC6FF;
+    padding: 10px;
+}
+.item a{
+    color: ghostwhite;
+    text-decoration: none;
+}
+.item a.active{
+    color: black;
+}
