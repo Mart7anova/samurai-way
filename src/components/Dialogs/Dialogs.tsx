@@ -1,23 +1,20 @@
 import React from 'react';
-import {NavLink, Route} from 'react-router-dom';
 import c from './Dialogs.module.css'
 import {DialogItem} from './DialogItem/DialogItem';
 import {Message} from './Message/Message';
+import {dialogsType, messageType} from '../../index';
 
-const users =[
-    {id:1, name: 'Ira'},
-    {id:2, name: 'Misha'},
-    {id:3, name: 'Kate'},
-    {id:4, name: 'Kiril'}
-]
+type PropsType = {
+    dialogs: Array<dialogsType>
+    messages: Array<messageType>
+}
 
-
-export const Dialogs = () => {
+export const Dialogs = (props:PropsType) => {
     return (
         <div className={c.dialogs}>
-                <DialogItem users={users}/>
+            <DialogItem dialogs={props.dialogs}/>
             <div className={c.messages}>
-                <Message/>
+                <Message messages={props.messages}/>
             </div>
         </div>
     )

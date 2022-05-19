@@ -1,15 +1,18 @@
 import React from 'react';
+import {myPostType} from '../../..';
 import c from './MyPosts.module.css'
 import {Post} from './Post/Post';
 
-export const MyPosts=()=>{
-    return(
+type PropsType = {
+    posts: Array<myPostType>
+}
+
+export const MyPosts = (props:PropsType) => {
+    return (
         <div>
             <div className={c.content}>
                 <h3>My posts</h3>
-                <Post message={`I like chips`} like={20}/>
-                <Post message={`How are you?`} />
-                <Post message={`Hello! I'm a Kitty Cat :)`} like={50}/>
+                <Post posts={props.posts}/>
             </div>
         </div>
     )

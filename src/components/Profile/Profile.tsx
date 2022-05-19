@@ -1,14 +1,19 @@
 import React from 'react';
 import c from './Profile.module.css'
-import {MyPosts} from "./MyPosts/MyPosts";
+import {MyPosts} from './MyPosts/MyPosts';
+import {ProfileInfo} from './ProfileInfo/ProfileInfo';
+import {myPostType} from '../../index';
 
-export const Profile=()=>{
+type PropsType = {
+    posts: Array<myPostType>
+}
+
+export const Profile=(props: PropsType)=>{
     return(
         <div>
             <div className={c.content}>
-                <img src="https://img.freepik.com/free-vector/cat-vector-head-kitten-cartoon_71328-174.jpg"/>
-                Kitty Cat
-                <MyPosts/>
+                <ProfileInfo/>
+                <MyPosts posts={props.posts}/>
             </div>
         </div>
     )

@@ -1,12 +1,20 @@
 import React from 'react';
 import c from './Message.module.css'
+import {messageType} from '../../../index';
 
-export const Message = () => {
+
+type PropsType = {
+    messages: Array<messageType>
+}
+
+export const Message = (props: PropsType) => {
     return (
         <div className={c.dialogsItem}>
-            <div className={c.message}>hi</div>
-            <div className={c.message}>hello</div>
-            <div className={c.message}>yo</div>
+            {props.messages.map(m =>
+                <div className={c.message}>
+                    {m.message}
+                </div>
+            )}
         </div>
     )
 }

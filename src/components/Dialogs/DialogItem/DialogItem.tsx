@@ -1,27 +1,23 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 import c from './DialogItem.module.css'
+import {dialogsType} from '../../../index';
 
-type headerType={
-    users: Array<userType>
+type PropsType = {
+    dialogs: Array<dialogsType>
 }
 
-type userType={
-    id:number
-    name: string
-}
-
-export const DialogItem:React.FC<headerType> = (props) => {
+export const DialogItem: React.FC<PropsType> = (props) => {
     return (
         <div className={c.dialogsItem}>
             <div>
-                    {props.users.map(el=>
-                        <NavLink to={'/dialog/'+ el.id} className={c.dialog + ' ' + c.active}>
-                            <div>
-                                {el.name}
-                            </div>
-                        </NavLink>
-                    )}
+                {props.dialogs.map(el =>
+                    <NavLink to={'/dialog/' + el.id} className={c.dialog + ' ' + c.active}>
+                        <div>
+                            {el.name}
+                        </div>
+                    </NavLink>
+                )}
             </div>
         </div>
     )
