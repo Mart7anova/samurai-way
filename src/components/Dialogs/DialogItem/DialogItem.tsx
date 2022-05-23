@@ -1,7 +1,7 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
+import { dialogsType } from '../../../redux/state';
 import c from './DialogItem.module.css'
-import {dialogsType} from '../../../index';
 
 type PropsType = {
     dialogs: Array<dialogsType>

@@ -4,27 +4,27 @@ import {Header} from './components/Header/Header';
 import {Profile} from './components/Profile/Profile';
 import {Navbar} from './components/Navbar/Navbar';
 import {Dialogs} from './components/Dialogs/Dialogs';
-import {BrowserRouter, Route} from 'react-router-dom';
-import {dialogsType, messageType, myPostType} from './index';
+import {Route} from 'react-router-dom';
+import {addPost, state, updateNewPostText} from './redux/state';
 
-type PropsType = {
-    posts: Array<myPostType>
-    dialogs: Array<dialogsType>
-    messages: Array<messageType>
-}
 
-function App(props:PropsType) {
+function App() {
     return (
-        <BrowserRouter>
-            <div className="App">
-                <Header/>
-                <Navbar/>
-                <div className="App-content">
-                    <Route path="/profile" render={()=><Profile posts={props.posts}/>}/> {/*<Dialogs/>*/}
-                    <Route path="/dialog" render={()=><Dialogs dialogs={props.dialogs} messages={props.messages}/>}/> {/*<Dialogs/>*/}
-                </div>
+        <div className="App">
+            <Header/>
+            <Navbar/>
+            <div className="App-content">
+                <Route path="/profile" render={() =>
+                    <Profile posts={state.profilePage.posts}
+                             newPostValue={state.profilePage.newPostValue}
+                             updateNewPostText={updateNewPostText}
+                             addPost={addPost}
+                    />}/>
+                <Route path="/dialog" render={() =>
+                    <Dialogs dialogs={state.dialogPage.dialogs}
+                             messages={state.dialogPage.messages}/>}/>
             </div>
-        </BrowserRouter>
+        </div>
     );
 }
 

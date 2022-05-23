@@ -1,5 +1,5 @@
 import React from 'react';
-import {myPostType} from '../../../..';
+import { myPostType } from '../../../../redux/state';
 import c from './Post.module.css'
 
 type PropsType = {
@@ -13,7 +13,7 @@ export const Post = (props: PropsType) => {
                 <div>
                     <div className={c.content}>
                         <img src="https://img.freepik.com/free-vector/cat-vector-head-kitten-cartoon_71328-174.jpg"/>
-                        {p.message}
+                        <span>{p.message}</span>
                     </div>
                     <div className={c.like}>Like: {p.like}</div>
                 </div>
