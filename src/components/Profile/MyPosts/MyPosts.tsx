@@ -12,12 +12,9 @@ type PropsType = {
 
 export const MyPosts: React.FC<PropsType> = (props) => {
 
-    let newPostElement = React.createRef<HTMLTextAreaElement>()
+    const onPostChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.updateNewPostText(e.currentTarget.value)
 
-    const onPostChangeHandler = () => {
-        if (newPostElement.current) {
-            props.updateNewPostText(newPostElement.current.value)
-        }
     }
 
     let addPostHandler = () => {
@@ -29,7 +26,7 @@ export const MyPosts: React.FC<PropsType> = (props) => {
             <div className={c.content}>
                 <h3>My posts</h3>
                 <div>
-                    <textarea ref={newPostElement} value={props.newPostValue} onChange={onPostChangeHandler}></textarea>
+                    <textarea value={props.newPostValue} onChange={onPostChangeHandler}></textarea>
                 </div>
                 <div>
                     <button onClick={addPostHandler}>Add</button>

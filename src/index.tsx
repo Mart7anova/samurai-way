@@ -1,7 +1,16 @@
 import React from 'react';
-import './index.css';
-import {rerenderTree} from './render';
-import {state} from './redux/state';
+import ReactDOM from 'react-dom';
+import App from './App';
+import {BrowserRouter} from 'react-router-dom';
+import {addPost, state, updateNewPostText} from './redux/state';
 
-rerenderTree(state)
+export const rerenderTree = () =>{
+    ReactDOM.render(
+        <BrowserRouter>
+            <App state={state} updateNewPostText={updateNewPostText} addPost={addPost} />
+        </BrowserRouter>, document.getElementById('root')
+    );
+}
+rerenderTree()
+
 
