@@ -1,9 +1,9 @@
 import React from 'react';
-import { myPostType } from '../../../../redux/state';
+import { MyPostType } from '../../../../redux/state';
 import c from './Post.module.css'
 
 type PropsType = {
-    posts: Array<myPostType>
+    posts: Array<MyPostType>
 }
 
 export const Post = (props: PropsType) => {

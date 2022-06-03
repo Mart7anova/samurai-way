@@ -1,10 +1,10 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
-import { dialogsType } from '../../../redux/state';
+import { DialogsType } from '../../../redux/state';
 import c from './DialogItem.module.css'
 
 type PropsType = {
-    dialogs: Array<dialogsType>
+    dialogs: Array<DialogsType>
 }
 
 export const DialogItem: React.FC<PropsType> = (props) => {

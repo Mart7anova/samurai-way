@@ -1,18 +1,22 @@
-import React from 'react';
-import { messageType } from '../../../redux/state';
+import React, {ChangeEvent} from 'react';
+import {ActionsType, addMessageAC, MessageType, updateNewMessageTextAC} from '../../../redux/state';
 import c from './Message.module.css'
 
 
 type PropsType = {
-    messages: Array<messageType>
+    messages: Array<MessageType>
+    newPostMessage: string
+    dispatch: (action: ActionsType)=>void
 }
 
 export const Message = (props: PropsType) => {
 
-    let newMassageElement = React.createRef<HTMLTextAreaElement>()
-
-    let sentMessage=()=>{
-        alert(newMassageElement.current?.value)
+    const onMessageChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) =>{
+        const newText=e.currentTarget.value
+        props.dispatch(updateNewMessageTextAC(newText))
+    }
+    const sentMessageHandler=()=>{
+        props.dispatch(addMessageAC())
     }
 
     return (
@@ -23,10 +27,10 @@ export const Message = (props: PropsType) => {
                 </div>
             )}
             <div>
-                <textarea ref={newMassageElement}></textarea>
+                <textarea value={props.newPostMessage} onChange={onMessageChangeHandler}></textarea>
             </div>
             <div>
-                <button onClick={sentMessage}>Sent</button>
+                <button onClick={sentMessageHandler}>Sent</button>
             </div>
         </div>
     )
