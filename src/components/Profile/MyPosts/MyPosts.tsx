@@ -1,7 +1,8 @@
 import React, {ChangeEvent} from 'react';
-import {ActionsType, addMessageAC, MyPostType, updateNewPostTextAC} from '../../../redux/state';
+import {ActionsType, MyPostType} from '../../../redux/state';
 import c from './MyPosts.module.css'
 import {Post} from './Post/Post';
+import {addPostAC, updateNewPostTextAC} from '../../../redux/profileReducer';
 
 type PropsType = {
     posts: Array<MyPostType>
@@ -19,7 +20,7 @@ export const MyPosts: React.FC<PropsType> = (props) => {
     }
 
     const addPostHandler = () => {
-        props.dispatch(addMessageAC())
+        props.dispatch(addPostAC())
     }
 
     return (
