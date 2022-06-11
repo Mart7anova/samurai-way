@@ -1,22 +1,18 @@
 import React from 'react';
 import c from './Dialogs.module.css'
 import {DialogItem} from './DialogItem/DialogItem';
-import {Message} from './Message/Message';
-import {ActionsType, DialogsType, MessageType} from '../../redux/store';
+import {MessageContainer} from './Message/MessageContainer';
 
 type PropsType = {
-    dialogs: Array<DialogsType>
-    messages: Array<MessageType>
-    dispatch: (action: ActionsType)=>void
-    newPostMessage: string
+    store: any
 }
 
 export const Dialogs = (props:PropsType) => {
     return (
         <div className={c.dialogs}>
-            <DialogItem dialogs={props.dialogs}/>
+            <DialogItem dialogs={props.store.getState().dialogPage.dialogs}/>
             <div className={c.messages}>
-                <Message messages={props.messages} newPostMessage={props.newPostMessage} dispatch={props.dispatch}/>
+                <MessageContainer store={props.store}/>
             </div>
         </div>
     )

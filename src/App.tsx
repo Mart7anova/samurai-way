@@ -10,6 +10,7 @@ import {ActionsType, StateType} from './redux/store';
 type propsType={
     state: StateType
     dispatch: (action:ActionsType)=>void
+    store: any
 }
 
 function App(props: propsType) {
@@ -19,16 +20,9 @@ function App(props: propsType) {
             <Navbar/>
             <div className="App-content">
                 <Route path="/profile" render={() =>
-                    <Profile posts={props.state.profilePage.posts}
-                             newPostValue={props.state.profilePage.newPostValue}
-                             dispatch={props.dispatch}
-                    />}/>
+                    <Profile store={props.store}/>}/>
                 <Route path="/dialog" render={() =>
-                    <Dialogs dialogs={props.state.dialogPage.dialogs}
-                             newPostMessage = {props.state.dialogPage.newPostMessage}
-                             messages={props.state.dialogPage.messages}
-                             dispatch={props.dispatch}
-                    />}/>
+                    <Dialogs store={props.store}/>}/>
             </div>
         </div>
     );

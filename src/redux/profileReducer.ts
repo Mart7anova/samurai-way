@@ -16,7 +16,7 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
             state.newPostValue = ''
             return state
         case 'UPDATE-NEW-POST-TEXT':
-            state.newPostValue = action.newText
+            state.newPostValue = action.newMessage
             return state
         default:
             return state
@@ -26,4 +26,4 @@ export type AddPostActionType = ReturnType<typeof addPostAC>
 export type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextAC>
 
 export const addPostAC = () => ({type:'ADD-POST'} as const)
-export const updateNewPostTextAC = (newText: string) => ({type:'UPDATE-NEW-POST-TEXT', newText} as const)
+export const updateNewPostTextAC = (newText: string) => ({type:'UPDATE-NEW-POST-TEXT', newMessage: newText} as const)

@@ -1,4 +1,3 @@
-import {rerenderTree} from '../index';
 import {AddPostActionType, profileReducer, UpdateNewPostTextActionType} from './profileReducer';
 import {AddMessageActionType, dialogsReducer, UpdateNewMessageTextActionType} from './dialogsReducer';
 
@@ -29,11 +28,16 @@ export type StateType = {
     dialogPage: DialogsPageType
 }
 
-export type StoreType={
+export type StoreType = {
     _state: StateType
-    getState: ()=>StateType
-    dispatch: (action:ActionsType)=>void
+    getState: () => StateType
+    dispatch: (action: ActionsType) => void
+    _callSubscriber: () => void
+    subscribe: (callback: () => void) => void
 }
+export type ActionsType = AddPostActionType | UpdateNewPostTextActionType
+    | UpdateNewMessageTextActionType | AddMessageActionType
+
 
 export let store: StoreType = {
     _state: {
@@ -61,17 +65,19 @@ export let store: StoreType = {
             newPostMessage: ''
         }
     },
-    getState(){
+    getState() {
         return this._state
     },
-    dispatch(action){
+    dispatch(action) {
         this._state.profilePage = profileReducer(this._state.profilePage, action)
         this._state.dialogPage = dialogsReducer(this._state.dialogPage, action)
-        debugger
-        rerenderTree()
+        this._callSubscriber()
+    },
+    _callSubscriber() {
+    },
+    subscribe(observer: () => void) {
+        this._callSubscriber = observer
     }
+
 }
 
-
-export type ActionsType= AddPostActionType | UpdateNewPostTextActionType
-    | UpdateNewMessageTextActionType | AddMessageActionType
