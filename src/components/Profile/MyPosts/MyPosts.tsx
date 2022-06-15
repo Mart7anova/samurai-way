@@ -1,18 +1,10 @@
 import React, {ChangeEvent} from 'react';
-import {MyPostType} from '../../../redux/store';
 import c from './MyPosts.module.css'
 import {Post} from './Post/Post';
-
-type PropsType = {
-    posts: Array<MyPostType>
-    newPostValue: string
-    updateNewPostText:(newText: string)=>void
-    addPost: ()=>void
-}
+import {MyPostsPropsType} from './MyPostsContainer';
 
 
-
-export const MyPosts: React.FC<PropsType> = (props) => {
+export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
 
     const onPostChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         const newText=e.currentTarget.value

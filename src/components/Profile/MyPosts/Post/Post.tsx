@@ -1,9 +1,9 @@
 import React from 'react';
-import { MyPostType } from '../../../../redux/store';
 import c from './Post.module.css'
+import {PostType} from '../../../../redux/profileReducer';
 
 type PropsType = {
-    posts: Array<MyPostType>
+    posts: Array<PostType>
 }
 
 export const Post = (props: PropsType) => {

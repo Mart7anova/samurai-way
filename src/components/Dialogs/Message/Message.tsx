@@ -1,5 +1,5 @@
 import React, {ChangeEvent} from 'react';
-import {MessageType} from '../../../redux/store';
+import { MessageType } from '../../../redux/dialogsReducer';
 import c from './Message.module.css'
 
 
