@@ -1,5 +1,5 @@
-import {AddPostActionType, profileReducer, UpdateNewPostTextActionType} from './profileReducer';
-import {AddMessageActionType, dialogsReducer, UpdateNewMessageTextActionType} from './dialogsReducer';
+import {AddPostActionType, UpdateNewPostTextActionType} from './profileReducer';
+import {AddMessageActionType, UpdateNewMessageTextActionType} from './dialogsReducer';
 
 export type MyPostType = {
     id: number
@@ -29,16 +29,16 @@ export type StateType = {
 }
 
 export type StoreType = {
-    _state: StateType
+    /*_state: StateType*/
     getState: () => StateType
     dispatch: (action: ActionsType) => void
-    _callSubscriber: () => void
+    /*_callSubscriber: () => void*/
     subscribe: (callback: () => void) => void
 }
 export type ActionsType = AddPostActionType | UpdateNewPostTextActionType
     | UpdateNewMessageTextActionType | AddMessageActionType
 
-
+/*
 export let store: StoreType = {
     _state: {
         profilePage: {
@@ -79,5 +79,5 @@ export let store: StoreType = {
         this._callSubscriber = observer
     }
 
-}
+}*/
 

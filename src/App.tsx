@@ -3,14 +3,10 @@ import './App.css';
 import {Header} from './components/Header/Header';
 import {Profile} from './components/Profile/Profile';
 import {Navbar} from './components/Navbar/Navbar';
-import {Dialogs} from './components/Dialogs/Dialogs';
 import {Route} from 'react-router-dom';
-import {ActionsType, StateType} from './redux/store';
+import {DialogsContainer} from './components/Dialogs/DialogsContainer';
 
 type propsType={
-    state: StateType
-    dispatch: (action:ActionsType)=>void
-    store: any
 }
 
 function App(props: propsType) {
@@ -20,9 +16,9 @@ function App(props: propsType) {
             <Navbar/>
             <div className="App-content">
                 <Route path="/profile" render={() =>
-                    <Profile store={props.store}/>}/>
+                    <Profile />}/>
                 <Route path="/dialog" render={() =>
-                    <Dialogs store={props.store}/>}/>
+                    <DialogsContainer />}/>
             </div>
         </div>
     );
