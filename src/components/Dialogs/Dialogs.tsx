@@ -2,15 +2,9 @@ import React from 'react';
 import c from './Dialogs.module.css'
 import {DialogItem} from './DialogItem/DialogItem';
 import {Message} from './Message/Message';
-import { DialogsPageType } from '../../redux/dialogsReducer';
+import {DialogsPropsType} from './DialogsContainer';
 
-type PropsType = {
-    dialogPage: DialogsPageType
-    onMessageChange: (newMessage: string) => void
-    sentMessage: () => void
-}
-
-export const Dialogs = (props: PropsType) => {
+export const Dialogs = (props: DialogsPropsType) => {
     return (
         <div className={c.dialogs}>
             <DialogItem dialogs={props.dialogPage.dialogs}/>

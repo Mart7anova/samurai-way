@@ -5,9 +5,9 @@ import {Profile} from './components/Profile/Profile';
 import {Navbar} from './components/Navbar/Navbar';
 import {Route} from 'react-router-dom';
 import {DialogsContainer} from './components/Dialogs/DialogsContainer';
+import { UsersContainer } from './components/Users/UsersContainer';
 
-type propsType={
-}
+type propsType = {}
 
 function App(props: propsType) {
     return (
@@ -16,9 +16,11 @@ function App(props: propsType) {
             <Navbar/>
             <div className="App-content">
                 <Route path="/profile" render={() =>
-                    <Profile />}/>
+                    <Profile/>}/>
                 <Route path="/dialog" render={() =>
-                    <DialogsContainer />}/>
+                    <DialogsContainer/>}/>
+                <Route path="/users" render={() =>
+                    <UsersContainer/>}/>
             </div>
         </div>
     );

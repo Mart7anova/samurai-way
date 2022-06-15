@@ -7,7 +7,7 @@ import {MyPostsPropsType} from './MyPostsContainer';
 export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
 
     const onPostChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        const newText=e.currentTarget.value
+        const newText = e.currentTarget.value
         props.updateNewPostText(newText)
     }
 

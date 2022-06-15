@@ -1,6 +1,6 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
-import { DialogsType } from '../../../redux/dialogsReducer';
+import {DialogsType} from '../../../redux/dialogs-reducer';
 import c from './DialogItem.module.css'
 
 type PropsType = {
@@ -12,7 +12,7 @@ export const DialogItem: React.FC<PropsType> = (props) => {
         <div className={c.dialogsItem}>
             <div>
                 {props.dialogs.map(el =>
-                    <NavLink to={'/dialog/' + el.id} className={c.dialog + ' ' + c.active}>
+                    <NavLink to={'/dialog/' + el.id} key={el.id} className={c.dialog + ' ' + c.active}>
                         <div>
                             {el.name}
                         </div>

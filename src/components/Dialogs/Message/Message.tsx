@@ -1,29 +1,29 @@
 import React, {ChangeEvent} from 'react';
-import { MessageType } from '../../../redux/dialogsReducer';
+import {MessageType} from '../../../redux/dialogs-reducer';
 import c from './Message.module.css'
 
 
 type PropsType = {
     messages: Array<MessageType>
     newPostMessage: string
-    onMessageChange: (newMessage: string)=>void
-    sentMessage: ()=>void
+    onMessageChange: (newMessage: string) => void
+    sentMessage: () => void
 }
 
 export const Message = (props: PropsType) => {
 
-    const onMessageChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) =>{
-        const newMessage=e.currentTarget.value
+    const onMessageChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        const newMessage = e.currentTarget.value
         props.onMessageChange(newMessage)
     }
-    const sentMessageHandler=()=>{
+    const sentMessageHandler = () => {
         props.sentMessage()
     }
 
     return (
         <div className={c.dialogsItem}>
             {props.messages.map(m =>
-                <div className={c.message}>
+                <div key={m.id} className={c.message}>
                     {m.message}
                 </div>
             )}
