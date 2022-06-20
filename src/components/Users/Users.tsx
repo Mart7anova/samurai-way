@@ -1,14 +1,15 @@
 import React from 'react';
 import {UsersPropsType} from './UsersContainer';
 import s from './Users.module.css'
+import axios from 'axios';
+import UserPhoto from './../../images/userPhoto.png'
 
 export class Users extends React.Component<UsersPropsType> {
-
-    const unfollowHandler = (id: number) => {
-        props.unfollow(id)
-    }
-    const followHandler = (id: number) => {
-        props.follow(id)
+    componentDidMount() {
+        axios.get('https://social-network.samuraijs.com/api/1.0/users')
+            .then(response => {
+                this.props.setUsers(response.data.items)
+            })
     }
 
     render() {
