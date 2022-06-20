@@ -1,34 +1,21 @@
 import {ActionsType} from './ActionsType';
 
 export type UserType = {
+    name: string
     id: number
+    uniqueUrlName: string | null
+    photos: {
+        small: string | null
+        large : string | null
+    }
+    status: string | null
     followed: boolean
-    fullName: string
-    status: string
-    location: { city: string, country: string }
-    photoURL: string
 }
 
 export type usersPagesType = typeof initialState
 
 const initialState = {
-    users: [
-        {
-            id: 1, followed: false, fullName: 'Anastasia', status: 'Hello world!',
-            location: {city: 'St.Petersburg', country: 'Russia'},
-            photoURL: 'https://img.freepik.com/free-vector/cat-vector-head-kitten-cartoon_71328-174.jpg'
-        },
-        {
-            id: 2, followed: true, fullName: 'Andrew', status: 'Hi!',
-            location: {city: 'St.Petersburg', country: 'Russia'},
-            photoURL: 'https://img.freepik.com/free-vector/cat-vector-head-kitten-cartoon_71328-174.jpg'
-        },
-        {
-            id: 3, followed: true, fullName: 'Lubov', status: 'Hi!',
-            location: {city: 'Tver', country: 'Russia'},
-            photoURL: 'https://img.freepik.com/free-vector/cat-vector-head-kitten-cartoon_71328-174.jpg'
-        },
-    ] as Array<UserType>,
+    users: [] as Array<UserType>,
 }
 
 export const usersReducer = (state: usersPagesType = initialState, action: ActionsType): usersPagesType => {
@@ -42,7 +29,7 @@ export const usersReducer = (state: usersPagesType = initialState, action: Actio
                 ...state,
                 users: state.users.map(u=>u.id === action.userId ? {...u, followed: false} : u)}
         case 'SET_USERS':
-            return {...state, users: {...state.users, ...action.users}}
+            return {...state, users: action.users}
         default:
             return state
     }

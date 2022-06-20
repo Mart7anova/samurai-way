@@ -2,7 +2,7 @@ import React from 'react';
 import {UsersPropsType} from './UsersContainer';
 import s from './Users.module.css'
 
-export const Users = (props: UsersPropsType) => {
+export class Users extends React.Component<UsersPropsType> {
 
     const unfollowHandler = (id: number) => {
         props.unfollow(id)
@@ -10,28 +10,28 @@ export const Users = (props: UsersPropsType) => {
     const followHandler = (id: number) => {
         props.follow(id)
     }
-    return (
-        <div>
-            {props.users.map(u =>
-                <div key={u.id} className={s.content}>
-                    <div>
-                        <img src={u.photoURL} className={s.img}/>
-                    </div>
 
-                    {u.followed
-                        ? <button onClick={() => unfollowHandler(u.id)}>Unfollow</button>
-                        : <button onClick={() => followHandler(u.id)}>Follow</button>
-                    }
-                    <div className={s.userInfo}>
-                        <div>{u.fullName}</div>
-                        <div>{u.status}</div>
+    render() {
+        return (
+            <div>
+                {this.props.users.map(u =>
+                    <div key={u.id} className={s.content}>
                         <div>
-                            {u.location.city},
-                            {u.location.country}
+                            <img src={u.photos.small != null ? u.photos.small : UserPhoto} className={s.img}/>
+                        </div>
+
+                        {u.followed
+                            ? <button onClick={() => this.props.unfollow(u.id)}>Unfollow</button>
+                            : <button onClick={() => this.props.follow(u.id)}>Follow</button>
+                        }
+                        <div className={s.userInfo}>
+                            <div>{u.name}</div>
+                            <div>{u.status}</div>
                         </div>
                     </div>
-                </div>
-            )}
-        </div>
-    );
-};
+                )}
+            </div>
+        );
+    }
+}
+
