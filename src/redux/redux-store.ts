@@ -8,7 +8,7 @@ export type AppStateType = ReturnType<typeof rootReducer>
 let rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogPage: dialogsReducer,
-    usersPage: usersReducer
+    usersPage: usersReducer,
 })
 
 export let store = createStore(rootReducer)
