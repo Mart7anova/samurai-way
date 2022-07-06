@@ -32,19 +32,19 @@ export const usersReducer = (state: usersPagesType = initialState, action: Actio
             return {
                 ...state,
                 users: state.users.map(u=>u.id === action.userId ? {...u, followed: false} : u)}
-        case 'SET_USERS':
+        case 'SET-USERS':
             return {...state, users: action.users}
-        case "SET_CURRENT_PAGE":
+        case "SET-CURRENT-PAGE":
             return {
                 ...state,
                 currentPage: action.currentPage
             }
-        case "SET_TOTAL_USERS_COUNT":
+        case "SET-TOTAL-USERS-COUNT":
             return {
                 ...state,
                 totalUserCount: action.users
             }
-        case "TOGGLE_IS_FETCHING":
+        case "TOGGLE-IS-FETCHING":
             return {
                 ...state,
                 isFetching: action.isFetching
@@ -62,7 +62,7 @@ export type ToggleIsFetchingAT = ReturnType<typeof toggleIsFetching>
 
 export const follow = (userId: number) => ({type: 'FOLLOW', userId} as const)
 export const unfollow = (userId: number) => ({type: 'UNFOLLOW', userId} as const)
-export const setUsers = (users: Array<UserType>) => ({type: 'SET_USERS', users} as const)
-export const setCurrentPage = (currentPage: number) => ({type: 'SET_CURRENT_PAGE', currentPage} as const)
-export const setTotalUsersCount = (users: number) => ({type: 'SET_TOTAL_USERS_COUNT', users} as const)
-export const toggleIsFetching = (isFetching: boolean) => ({type: 'TOGGLE_IS_FETCHING', isFetching} as const)
+export const setUsers = (users: Array<UserType>) => ({type: 'SET-USERS', users} as const)
+export const setCurrentPage = (currentPage: number) => ({type: 'SET-CURRENT-PAGE', currentPage} as const)
+export const setTotalUsersCount = (users: number) => ({type: 'SET-TOTAL-USERS-COUNT', users} as const)
+export const toggleIsFetching = (isFetching: boolean) => ({type: 'TOGGLE-IS-FETCHING', isFetching} as const)

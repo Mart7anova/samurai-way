@@ -2,7 +2,7 @@ import {profileReducer} from './profile-reducer';
 import {dialogsReducer} from './dialogs-reducer';
 import {ActionsType} from './ActionsType';
 
-type MyPostType = {
+type PostType = {
     id: number
     message: string
     like?: number
@@ -16,7 +16,7 @@ type MessageType = {
     message: string
 }
 type ProfilePageType = {
-    posts: Array<MyPostType>
+    posts: Array<PostType>
     newPostValue: string
 }
 type DialogsPageType = {
@@ -68,7 +68,7 @@ let store: StoreType = {
         return this._state
     },
     dispatch(action) {
-        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        //this._state.profilePage = profileReducer(this._state.profilePage, action)
         this._state.dialogPage = dialogsReducer(this._state.dialogPage, action)
         this._callSubscriber()
     },

@@ -1,11 +1,20 @@
 import React from 'react';
-import UserPhoto from './../../../images/userPhoto.png'
+import UserPhoto from './../../common/photo/catPhoto.png'
+import {Preloader} from "../../common/Preloader/Preloader";
 
-export const ProfileInfo=()=>{
-    return(
+type PropsType = {
+    profile: any
+}
+
+export const ProfileInfo = (props: PropsType) => {
+    if (!props.profile) {
+        return <Preloader/>
+    }
+    return (
         <div>
-                {/*<img src={UserPhoto}/>*/}
-                Kitty Cat
+            <img src={props.profile.photos.small ? props.profile.photos.small : UserPhoto}/>
+            <h1>{props.profile.fullName}</h1>
+            <div>Обо мне: {props.profile['aboutMe']}</div>
         </div>
     )
 }

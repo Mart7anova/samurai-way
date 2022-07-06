@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {AppStateType} from '../../redux/redux-store';
-import {
+ import {
     follow,
     setCurrentPage,
     setTotalUsersCount,
@@ -30,7 +30,7 @@ type mapDispatchToPropsType = {
 }
 export type UsersPropsType = mapStateToPropsType & mapDispatchToPropsType
 
-class UsersAPIComponent extends React.Component<UsersPropsType> {
+class UsersContainer extends React.Component<UsersPropsType> {
     componentDidMount() {
         this.props.toggleIsFetching(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
@@ -79,11 +79,11 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     }
 }
 
-export const UsersContainer = connect(mapStateToProps, {
+export default connect(mapStateToProps, {
     follow,
     unfollow,
     setUsers,
     setCurrentPage,
     setTotalUsersCount,
     toggleIsFetching,
-})(UsersAPIComponent)
+})(UsersContainer)

@@ -1,9 +1,16 @@
 import React from 'react';
-import {addPostAC, PostType, updateNewPostTextAC} from '../../../redux/profile-reducer';
+import {addPostAC, updateNewPostTextAC} from '../../../redux/profile-reducer';
 import {MyPosts} from './MyPosts';
 import {connect} from 'react-redux';
 import {AppStateType} from '../../../redux/redux-store';
 import {Dispatch} from 'redux';
+
+export type PostType = {
+    id: number
+    message: string
+    like?: number
+}
+
 
 type mapStateToPropsType = {
     posts: Array<PostType>
