@@ -21,8 +21,9 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
             return {
                 ...state,
                 posts: [
-                    ...state.posts,
-                    {id: 4, message: state.newPostValue}
+                    {id: 4, message: state.newPostValue},
+                    ...state.posts
+
                 ],
                 newPostValue: ''
             }
