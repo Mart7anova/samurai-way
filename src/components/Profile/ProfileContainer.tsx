@@ -43,4 +43,6 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     }
 }
 
-export default connect(mapStateToProps, {setUserProfile})(withRouter(ProfileContainer))
+export default connect(mapStateToProps, {
+    setUserProfile,
+}as mapDispatchToPropsType)(withRouter(ProfileContainer))

@@ -5,11 +5,20 @@ import {
     SetCurrentPageAT,
     SetTotalUsersCountAT,
     SetUsersAT,
-    ToggleIsFetchingAT,
     UnfollowAT
 } from './users-reducer';
+import {SetAuthUserDataAT} from './auth-reducer';
+import {ToggleIsLoadingAT} from './preloader-reductor';
 
 export type ActionsType =
-    AddPostAT | UpdateNewPostTextAT | SetUserProfileAT             //profile-reducer
-    | UpdateNewMessageTextAT | AddMessageAT     //dialog-reducer
-    | FollowAT | UnfollowAT | SetUsersAT | SetCurrentPageAT | SetTotalUsersCountAT | ToggleIsFetchingAT       //users-reducer
+//profile-reducer
+    AddPostAT | UpdateNewPostTextAT | SetUserProfileAT
+//dialog-reducer
+    | UpdateNewMessageTextAT | AddMessageAT
+//users-reducer
+    | FollowAT | UnfollowAT | SetUsersAT | SetCurrentPageAT
+    | SetTotalUsersCountAT
+// auth-reducer
+    | SetAuthUserDataAT
+//preloader-reducer
+    | ToggleIsLoadingAT

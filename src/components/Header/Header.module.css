@@ -4,4 +4,15 @@
 
 .header {
     grid-area: header;
+
+}
+
+.login{
+    float: right;
+    font-size: 30px;
+    color: black;
+}
+.login a{
+    text-decoration: none;
+    color: black;
 }
