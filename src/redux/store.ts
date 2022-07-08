@@ -1,7 +1,5 @@
-import {profileReducer} from './profile-reducer';
-import {dialogsReducer} from './dialogs-reducer';
-import {ActionsType} from './ActionsType';
 
+// @ts-ignore
 type PostType = {
     id: number
     message: string
@@ -32,6 +30,7 @@ type StateType = {
 type StoreType = {
     _state: StateType
     getState: () => StateType
+    // @ts-ignore
     dispatch: (action: ActionsType) => void
     _callSubscriber: () => void
     subscribe: (callback: () => void) => void
@@ -68,7 +67,9 @@ let store: StoreType = {
         return this._state
     },
     dispatch(action) {
-        //this._state.profilePage = profileReducer(this._state.profilePage, action)
+        // @ts-ignore
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        // @ts-ignore
         this._state.dialogPage = dialogsReducer(this._state.dialogPage, action)
         this._callSubscriber()
     },

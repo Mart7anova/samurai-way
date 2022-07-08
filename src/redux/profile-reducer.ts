@@ -1,5 +1,7 @@
-import {ActionsType} from './ActionsType';
 
+export type ProfileActionType = AddPostAT
+    | UpdateNewPostTextAT
+    | SetUserProfileAT
 
 export type ProfilePageType = typeof initialState
 
@@ -13,7 +15,7 @@ const initialState = {
     profile: null
 }
 
-export const profileReducer = (state: ProfilePageType = initialState, action: ActionsType): ProfilePageType => {
+export const profileReducer = (state: ProfilePageType = initialState, action: ProfileActionType): ProfilePageType => {
     switch (action.type) {
         case 'UPDATE-NEW-POST-TEXT':
             return {...state, newPostValue: action.newMessage}

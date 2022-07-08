@@ -1,4 +1,6 @@
-import {ActionsType} from './ActionsType';
+
+export type DialogsActionsType = UpdateNewMessageTextAT
+    | AddMessageAT
 
 export type DialogsType = {
     id: number
@@ -27,7 +29,7 @@ const initialState = {
     newPostMessage: ''
 }
 
-export const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsType): DialogsPageType => {
+export const dialogsReducer = (state: DialogsPageType = initialState, action: DialogsActionsType): DialogsPageType => {
     switch (action.type) {
         case 'UPDATE-NEW-MESSAGE-TEXT':
             return {...state, newPostMessage: action.newMessage}

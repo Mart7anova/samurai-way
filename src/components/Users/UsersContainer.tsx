@@ -1,18 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {AppStateType} from '../../redux/redux-store';
- import {
+import {
     follow,
-    setCurrentPage,
-    setTotalUsersCount,
-    setUsers, toggleFollowInProgress,
+    getUsers,
     unfollow,
     UserType
 } from '../../redux/users-reducer';
-import axios from "axios";
-import {Users} from "./Users";
-import {Preloader} from "../common/Preloader/Preloader";
-import {toggleIsLoading} from '../../redux/preloader-reductor';
+import {Users} from './Users';
+import {Preloader} from '../common/Preloader/Preloader';
 
 type mapStateToPropsType = {
     users: Array<UserType>
@@ -20,47 +16,22 @@ type mapStateToPropsType = {
     totalUserCount: number
     currentPage: number
     isLoaded: boolean
-    followInProgress: boolean
     followUsers: Array<number>
 }
 type mapDispatchToPropsType = {
+    getUsers: (currentPage: number, pageSize: number) => void
     follow: (userId: number) => void
     unfollow: (userId: number) => void
-    setUsers: (users: Array<UserType>) => void
-    setCurrentPage: (currentPage: number) => void
-    setTotalUsersCount: (users: number) => void
-    toggleIsLoading: (isLoaded: boolean) => void
-    toggleFollowInProgress: (followInProgress: boolean, userId: number) => void
 }
 export type UsersPropsType = mapStateToPropsType & mapDispatchToPropsType
 
 class UsersContainer extends React.Component<UsersPropsType> {
     componentDidMount() {
-        this.props.toggleIsLoading(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
-            withCredentials: true
-        })
-            .then(response => {
-                this.props.setUsers(response.data.items)
-                this.props.setTotalUsersCount(response.data.totalCount)
-            })
-            .finally(()=>{
-                this.props.toggleIsLoading(false)
-            })
+        this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
 
     onPageChanged = (currentPage: number) => {
-        this.props.toggleIsLoading(true)
-        this.props.setCurrentPage(currentPage)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${this.props.pageSize}`, {
-            withCredentials: true
-        })
-            .then(response => {
-                this.props.setUsers(response.data.items)
-            })
-            .finally(()=>{
-                this.props.toggleIsLoading(false)
-            })
+        this.props.getUsers(currentPage, this.props.pageSize)
     }
 
     render() {
@@ -70,11 +41,11 @@ class UsersContainer extends React.Component<UsersPropsType> {
                 currentPage={this.props.currentPage}
                 onPageChanged={this.onPageChanged}
                 users={this.props.users}
+                totalUserCount={this.props.totalUserCount}
+
+                followUsers={this.props.followUsers}
                 follow={this.props.follow}
                 unfollow={this.props.unfollow}
-                toggleFollowInProgress={this.props.toggleFollowInProgress}
-                followInProgress={this.props.followInProgress}
-                followUsers={this.props.followUsers}
             />
         </>
     }
@@ -87,17 +58,12 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
         totalUserCount: state.usersPage.totalUserCount,
         currentPage: state.usersPage.currentPage,
         isLoaded: state.preloader.isLoaded,
-        followInProgress: state.usersPage.followInProgress,
         followUsers: state.usersPage.followUsers
     }
 }
 
 export default connect(mapStateToProps, {
+    getUsers,
     follow,
     unfollow,
-    setUsers,
-    setCurrentPage,
-    setTotalUsersCount,
-    toggleIsLoading,
-    toggleFollowInProgress,
 } as mapDispatchToPropsType)(UsersContainer)
