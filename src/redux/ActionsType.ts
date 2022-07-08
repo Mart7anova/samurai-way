@@ -4,7 +4,7 @@ import {
     FollowAT,
     SetCurrentPageAT,
     SetTotalUsersCountAT,
-    SetUsersAT,
+    SetUsersAT, ToggleFollowInProgressAT,
     UnfollowAT
 } from './users-reducer';
 import {SetAuthUserDataAT} from './auth-reducer';
@@ -17,7 +17,7 @@ export type ActionsType =
     | UpdateNewMessageTextAT | AddMessageAT
 //users-reducer
     | FollowAT | UnfollowAT | SetUsersAT | SetCurrentPageAT
-    | SetTotalUsersCountAT
+    | SetTotalUsersCountAT | ToggleFollowInProgressAT
 // auth-reducer
     | SetAuthUserDataAT
 //preloader-reducer

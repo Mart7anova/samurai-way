@@ -6,7 +6,7 @@ export type UserType = {
     uniqueUrlName: string | null
     photos: {
         small: string | null
-        large : string | null
+        large: string | null
     }
     status: string | null
     followed: boolean
@@ -19,6 +19,8 @@ const initialState = {
     pageSize: 10,
     totalUserCount: 0,
     currentPage: 1,
+    followInProgress: false,
+    followUsers: [] as Array<number>,
 }
 
 export const usersReducer = (state: usersPagesType = initialState, action: ActionsType): usersPagesType => {
@@ -26,22 +28,31 @@ export const usersReducer = (state: usersPagesType = initialState, action: Actio
         case 'FOLLOW':
             return {
                 ...state,
-                users: state.users.map(u=>u.id === action.userId ? {...u, followed: true} : u)}
+                users: state.users.map(u => u.id === action.userId ? {...u, followed: true} : u)
+            }
         case 'UNFOLLOW':
             return {
                 ...state,
-                users: state.users.map(u=>u.id === action.userId ? {...u, followed: false} : u)}
+                users: state.users.map(u => u.id === action.userId ? {...u, followed: false} : u)
+            }
         case 'SET-USERS':
             return {...state, users: action.users}
-        case "SET-CURRENT-PAGE":
+        case 'SET-CURRENT-PAGE':
             return {
                 ...state,
                 currentPage: action.currentPage
             }
-        case "SET-TOTAL-USERS-COUNT":
+        case 'SET-TOTAL-USERS-COUNT':
             return {
                 ...state,
                 totalUserCount: action.users
+            }
+        case 'TOGGLE-FOLLOW-IN-PROGRESS':
+            return {
+                ...state,
+                followUsers: action.followInProgress
+                    ? [...state.followUsers, action.userId]
+                    : state.followUsers.filter(id => id !== action.userId)
             }
         default:
             return state
@@ -52,9 +63,13 @@ export type UnfollowAT = ReturnType<typeof unfollow>
 export type SetUsersAT = ReturnType<typeof setUsers>
 export type SetCurrentPageAT = ReturnType<typeof setCurrentPage>
 export type SetTotalUsersCountAT = ReturnType<typeof setTotalUsersCount>
+export type ToggleFollowInProgressAT = ReturnType<typeof toggleFollowInProgress>
 
 export const follow = (userId: number) => ({type: 'FOLLOW', userId} as const)
 export const unfollow = (userId: number) => ({type: 'UNFOLLOW', userId} as const)
 export const setUsers = (users: Array<UserType>) => ({type: 'SET-USERS', users} as const)
 export const setCurrentPage = (currentPage: number) => ({type: 'SET-CURRENT-PAGE', currentPage} as const)
 export const setTotalUsersCount = (users: number) => ({type: 'SET-TOTAL-USERS-COUNT', users} as const)
+export const toggleFollowInProgress = (followInProgress: boolean, userId: number) => (
+    {type: 'TOGGLE-FOLLOW-IN-PROGRESS', followInProgress, userId} as const
+)

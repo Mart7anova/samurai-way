@@ -5,7 +5,7 @@ import {AppStateType} from '../../redux/redux-store';
     follow,
     setCurrentPage,
     setTotalUsersCount,
-    setUsers,
+    setUsers, toggleFollowInProgress,
     unfollow,
     UserType
 } from '../../redux/users-reducer';
@@ -20,6 +20,8 @@ type mapStateToPropsType = {
     totalUserCount: number
     currentPage: number
     isLoaded: boolean
+    followInProgress: boolean
+    followUsers: Array<number>
 }
 type mapDispatchToPropsType = {
     follow: (userId: number) => void
@@ -28,6 +30,7 @@ type mapDispatchToPropsType = {
     setCurrentPage: (currentPage: number) => void
     setTotalUsersCount: (users: number) => void
     toggleIsLoading: (isLoaded: boolean) => void
+    toggleFollowInProgress: (followInProgress: boolean, userId: number) => void
 }
 export type UsersPropsType = mapStateToPropsType & mapDispatchToPropsType
 
@@ -69,6 +72,9 @@ class UsersContainer extends React.Component<UsersPropsType> {
                 users={this.props.users}
                 follow={this.props.follow}
                 unfollow={this.props.unfollow}
+                toggleFollowInProgress={this.props.toggleFollowInProgress}
+                followInProgress={this.props.followInProgress}
+                followUsers={this.props.followUsers}
             />
         </>
     }
@@ -80,7 +86,9 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
         pageSize: state.usersPage.pageSize,
         totalUserCount: state.usersPage.totalUserCount,
         currentPage: state.usersPage.currentPage,
-        isLoaded: state.preloader.isLoaded
+        isLoaded: state.preloader.isLoaded,
+        followInProgress: state.usersPage.followInProgress,
+        followUsers: state.usersPage.followUsers
     }
 }
 
@@ -91,5 +99,5 @@ export default connect(mapStateToProps, {
     setCurrentPage,
     setTotalUsersCount,
     toggleIsLoading,
-
+    toggleFollowInProgress,
 } as mapDispatchToPropsType)(UsersContainer)

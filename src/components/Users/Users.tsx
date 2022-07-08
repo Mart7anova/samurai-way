@@ -11,6 +11,9 @@ type PropsType = {
     users: Array<UserType>
     follow: (userId: number) => void
     unfollow: (userId: number) => void
+    toggleFollowInProgress: (followInProgress: boolean, userId: number) => void
+    followInProgress: boolean
+    followUsers: Array<number>
 }
 
 export const Users = (props: PropsType) => {
@@ -35,7 +38,8 @@ export const Users = (props: PropsType) => {
                              alt={'User photo'}/>
                     </NavLink>
                     {u.followed
-                        ? <button onClick={() =>
+                        ? <button disabled={props.followUsers.some(id => id === u.id)} onClick={() =>{
+                            props.toggleFollowInProgress(true, u.id)
                             axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
                                 withCredentials: true,
                                 headers:{
@@ -46,9 +50,11 @@ export const Users = (props: PropsType) => {
                                     if(response.data.resultCode === 0) {
                                         props.unfollow(u.id)
                                     }
+                                    props.toggleFollowInProgress(false, u.id)
                                 })
-                        }>Unfollow</button>
-                        : <button onClick={() =>
+                        }}>Unfollow</button>
+                        : <button disabled={props.followUsers.some(id => id === u.id)} onClick={() =>{
+                            props.toggleFollowInProgress(true, u.id)
                             axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,{}, {
                                 withCredentials: true,
                                 headers:{
@@ -60,8 +66,9 @@ export const Users = (props: PropsType) => {
                                     if(response.data.resultCode === 0){
                                         props.follow(u.id)
                                     }
+                                    props.toggleFollowInProgress(false, u.id)
                                 })
-                        }>Follow</button>
+                        }}>Follow</button>
                     }
                     <div className={s.userInfo}>
                         <div>{u.name}</div>
