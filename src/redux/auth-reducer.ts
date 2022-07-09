@@ -1,3 +1,5 @@
+import {authAPI} from '../api/api';
+import {AppDispatch, AppThunk} from './redux-store';
 
 export type AuthActionType = SetAuthUserDataAT
 
@@ -35,3 +37,13 @@ export type SetAuthUserDataAT = ReturnType<typeof setAuthUserData>
 export const setAuthUserData = (email: string, id: number, login: string,) => (
     {type: 'SET-USER-DATA', data: {email, id, login}} as const
 )
+
+export const getAuthMe = (): AppThunk => (dispatch: AppDispatch) => {
+    authAPI.me()
+        .then(data => {
+            if (data.resultCode === 0) {
+                const {email, id, login} = data.data
+                dispatch(setAuthUserData(email, id, login))
+            }
+        })
+}
