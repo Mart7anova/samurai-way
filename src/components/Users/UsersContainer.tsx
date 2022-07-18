@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ComponentType} from 'react';
 import {connect} from 'react-redux';
 import {AppStateType} from '../../redux/redux-store';
 import {
@@ -9,6 +9,7 @@ import {
 } from '../../redux/users-reducer';
 import {Users} from './Users';
 import {Preloader} from '../common/Preloader/Preloader';
+import {compose} from 'redux';
 
 type mapStateToPropsType = {
     users: Array<UserType>
@@ -62,8 +63,10 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     }
 }
 
-export default connect(mapStateToProps, {
-    getUsers,
-    follow,
-    unfollow,
-} as mapDispatchToPropsType)(UsersContainer)
+export default compose<ComponentType>(
+    connect(mapStateToProps, {
+        getUsers,
+        follow,
+        unfollow,
+    } as mapDispatchToPropsType),
+)(UsersContainer)
