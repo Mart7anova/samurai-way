@@ -3,10 +3,9 @@ import c from './Dialogs.module.css'
 import {DialogItem} from './DialogItem/DialogItem';
 import {Message} from './Message/Message';
 import {DialogsPropsType} from './DialogsContainer';
-import {Redirect} from 'react-router-dom';
 
 export const Dialogs = (props: DialogsPropsType) => {
-    if(!props.isAuth) return <Redirect to={'/login'}/>
+
     return (
         <div className={c.dialogs}>
             <DialogItem dialogs={props.dialogPage.dialogs}/>
