@@ -1,43 +1,29 @@
-import React, {ComponentType} from 'react';
-import {compose} from 'redux';
-import {connect} from 'react-redux';
-import {AppStateType} from '../../../redux/redux-store';
-import {getUserProfileStatus} from '../../../redux/profile-reducer';
-import {RouteComponentProps, withRouter} from 'react-router-dom';
+import React, { ChangeEvent } from 'react';
 
-type PathParamsType = {
-    userId?: string
+type PropsType = {
+    status: string
+    updateStatus: (status: string) => void
 }
-
-type mapStateToPropsType = {
-    profileStatus: string
-}
-
-type mapDispatchToPropsType ={
-    getUserProfileStatus: (userId?: string) => void
-}
-
-type PropsType = RouteComponentProps<PathParamsType> & ContainerPropsType
-type ContainerPropsType = mapStateToPropsType & mapDispatchToPropsType
 
 export class ProfileStatus extends React.Component<PropsType> {
-    componentDidMount() {
-        debugger
-        const userId = this.props.match.params.userId
-        this.props.getUserProfileStatus(userId)
-    }
-
     state = {
-        editMode: false
+        editMode: false,
+        statusValue: this.props.status
     }
-    activateEditMode = () =>{
+    activateEditMode = () => {
         this.setState({
             editMode: true
         })
     }
-    deactivateEditMode = () =>{
+    deactivateEditMode = () => {
         this.setState({
             editMode: false
+        })
+        this.props.updateStatus(this.state.statusValue)
+    }
+    onChangeStatus = (e: ChangeEvent<HTMLInputElement>) => {
+        this.setState({
+            statusValue: e.currentTarget.value
         })
     }
 
@@ -45,19 +31,14 @@ export class ProfileStatus extends React.Component<PropsType> {
         return (
             <>
                 {this.state.editMode
-                    ? <input value={this.props.profileStatus} autoFocus onBlur={this.deactivateEditMode}/>
-                    : <span onDoubleClick={this.activateEditMode}>{this.props.profileStatus || 'установить статус' }</span>
+                    ? <input value={this.state.statusValue}
+                             onChange={this.onChangeStatus}
+                             autoFocus
+                             onBlur={this.deactivateEditMode}
+                    />
+                    : <span onDoubleClick={this.activateEditMode}>{this.props.status || 'установить статус'}</span>
                 }
             </>
         );
     }
 }
-
-const mapStateToProps = (state: AppStateType): mapStateToPropsType => ({
-    profileStatus: state.profilePage.profileStatus,
-})
-
-export const ProfileStatusContainer = compose<ComponentType>(
-    connect(mapStateToProps,{getUserProfileStatus}as mapDispatchToPropsType),
-    withRouter,
-)(ProfileStatus)

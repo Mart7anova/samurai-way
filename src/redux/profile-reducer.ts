@@ -4,8 +4,8 @@ import {profileAPI} from '../api/api';
 
 export type ProfileActionType = AddPostAT
     | UpdateNewPostTextAT
-    | SetUserProfileAT
-    | SetUserProfileStatusAT
+    | SetProfileAT
+    | SetStatusAT
 
 export type ProfilePageType = typeof initialState
 
@@ -17,7 +17,7 @@ const initialState = {
     ],
     newPostValue: '',
     profile: null,
-    profileStatus: '',
+    status: '',
 }
 
 export const profileReducer = (state: ProfilePageType = initialState, action: ProfileActionType): ProfilePageType => {
@@ -34,15 +34,15 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Pr
                 ],
                 newPostValue: ''
             }
-        case 'SET-USER-PROFILE':
+        case 'SET-PROFILE':
             return {
                 ...state,
                 profile: action.profile
             }
-        case 'SET-USER-PROFILE-STATUS':
+        case 'SET-STATUS':
             return {
                 ...state,
-                profileStatus: action.status
+                status: action.status
             }
         default:
             return state
@@ -50,25 +50,34 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Pr
 };
 export type AddPostAT = ReturnType<typeof addPostAC>
 export type UpdateNewPostTextAT = ReturnType<typeof updateNewPostTextAC>
-export type SetUserProfileAT = ReturnType<typeof setUserProfile>
-export type SetUserProfileStatusAT = ReturnType<typeof setUserProfileStatus>
+export type SetProfileAT = ReturnType<typeof setProfile>
+export type SetStatusAT = ReturnType<typeof setStatus>
 
 export const addPostAC = () => ({type: 'ADD-POST'} as const)
 export const updateNewPostTextAC = (newText: string) => ({type: 'UPDATE-NEW-POST-TEXT', newMessage: newText} as const)
-export const setUserProfile = (profile: any) => ({type: 'SET-USER-PROFILE', profile} as const)
-export const setUserProfileStatus = (status: string) => ({type: 'SET-USER-PROFILE-STATUS', status} as const)
+export const setProfile = (profile: any) => ({type: 'SET-PROFILE', profile} as const)
+export const setStatus = (status: string) => ({type: 'SET-STATUS', status} as const)
 
 
-export const getUserProfile = (userId?: string): AppThunk => (dispatch: AppDispatch) => {
+export const getProfile = (userId?: string): AppThunk => (dispatch: AppDispatch) => {
     profileAPI.getProfile(userId)
         .then(data => {
-            dispatch(setUserProfile(data))
+            dispatch(setProfile(data))
         })
 }
 
-export const getUserProfileStatus = (userId?: string): AppThunk => (dispatch: AppDispatch) => {
+export const getStatus = (userId?: string): AppThunk => (dispatch: AppDispatch) => {
     profileAPI.geStatus(userId)
         .then(data => {
-            dispatch(setUserProfileStatus(data))
+            dispatch(setStatus(data))
+        })
+}
+
+export const updateStatus = (status: string): AppThunk => (dispatch: AppDispatch) => {
+    profileAPI.updateStatus(status)
+        .then(data => {
+            if(data.resultCode === 0){
+                dispatch(setStatus(data))
+            }
         })
 }

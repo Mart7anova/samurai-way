@@ -1,10 +1,12 @@
 import React from 'react';
 import UserPhoto from './../../common/photo/catPhoto.png'
 import {Preloader} from '../../common/Preloader/Preloader';
-import {ProfileStatusContainer} from './ProfileStatus';
+import {ProfileStatus} from './ProfileStatus';
 
 type PropsType = {
-    profile: any
+    profile: any,
+    status: string
+    updateStatus: (status: string) => void
 }
 
 export const ProfileInfo = (props: PropsType) => {
@@ -14,8 +16,11 @@ export const ProfileInfo = (props: PropsType) => {
     return (
         <div>
             <img src={props.profile.photos.small || UserPhoto} alt={'User'}/>
+            <span>{props.profile.userId}</span>
             <h1>{props.profile.fullName}</h1>
-            <ProfileStatusContainer/>
+            <ProfileStatus status={props.status}
+                           updateStatus={props.updateStatus}
+            />
             <hr/>
 
             <div>Обо мне: {props.profile['aboutMe']}</div>
