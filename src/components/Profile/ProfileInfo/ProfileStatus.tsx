@@ -1,10 +1,32 @@
-import React from 'react';
+import React, {ComponentType} from 'react';
+import {compose} from 'redux';
+import {connect} from 'react-redux';
+import {AppStateType} from '../../../redux/redux-store';
+import {getUserProfileStatus} from '../../../redux/profile-reducer';
+import {RouteComponentProps, withRouter} from 'react-router-dom';
 
-type PropsType = {
-    value: string
+type PathParamsType = {
+    userId?: string
 }
 
+type mapStateToPropsType = {
+    profileStatus: string
+}
+
+type mapDispatchToPropsType ={
+    getUserProfileStatus: (userId?: string) => void
+}
+
+type PropsType = RouteComponentProps<PathParamsType> & ContainerPropsType
+type ContainerPropsType = mapStateToPropsType & mapDispatchToPropsType
+
 export class ProfileStatus extends React.Component<PropsType> {
+    componentDidMount() {
+        debugger
+        const userId = this.props.match.params.userId
+        this.props.getUserProfileStatus(userId)
+    }
+
     state = {
         editMode: false
     }
@@ -23,10 +45,19 @@ export class ProfileStatus extends React.Component<PropsType> {
         return (
             <>
                 {this.state.editMode
-                    ? <input value={this.props.value} autoFocus onBlur={this.deactivateEditMode}/>
-                    : <span onClick={this.activateEditMode}>{this.props.value}</span>
+                    ? <input value={this.props.profileStatus} autoFocus onBlur={this.deactivateEditMode}/>
+                    : <span onDoubleClick={this.activateEditMode}>{this.props.profileStatus || 'установить статус' }</span>
                 }
             </>
         );
     }
 }
+
+const mapStateToProps = (state: AppStateType): mapStateToPropsType => ({
+    profileStatus: state.profilePage.profileStatus,
+})
+
+export const ProfileStatusContainer = compose<ComponentType>(
+    connect(mapStateToProps,{getUserProfileStatus}as mapDispatchToPropsType),
+    withRouter,
+)(ProfileStatus)
