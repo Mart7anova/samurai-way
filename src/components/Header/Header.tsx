@@ -8,7 +8,6 @@ type PropsType = {
 }
 
 export const Header = (props: PropsType) => {
-    console.log(props.data.login)
     return (
         <div className={c.header}>
             <header>
